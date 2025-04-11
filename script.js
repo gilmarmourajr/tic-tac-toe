@@ -2,7 +2,7 @@ const gameboard = (function () {
   const board = [];
 
   for (let i = 0; i < 3; i++) {
-    board[i] = [];
+    board[i] = ["", "", ""];
   }
 
   const getBoard = () => board;
@@ -64,26 +64,46 @@ const gameboard = (function () {
   return { getBoard, mark, checkWin };
 })();
 
-const game = (function () {
-  return {};
-})();
-
 function createPlayer(name, symbol) {
-  return { name, symbol };
-}
+    return { name, symbol };
+  }
 
 const player1 = createPlayer("Gil", "X");
 const player2 = createPlayer("Julia", "O");
 
-gameboard.mark(player1, 0, 0);
-gameboard.mark(player1, 0, 1);
-gameboard.mark(player2, 0, 2);
-gameboard.mark(player2, 1, 0);
-gameboard.mark(player2, 1, 1);
-gameboard.mark(player1, 1, 2);
-gameboard.mark(player1, 2, 0);
-gameboard.mark(player1, 2, 1);
-gameboard.mark(player2, 2, 2);
+const game = (function () {
+  let currentPlayer = player1;
+  let gameFinished = false;
 
-console.log(gameboard.getBoard());
-console.log(gameboard.checkWin());
+  const playRound = function(row, column) {
+    if(gameFinished) {
+        return;
+    }
+
+    gameboard.mark(currentPlayer, row, column);
+
+    let winnerStatus = gameboard.checkWin();
+    if(winnerStatus) {
+        gameFinished = true;
+
+        if(winnerStatus === "tie") {
+            console.log("Game over! Tie.");
+        } else {
+            console.log(`Game over! ${currentPlayer.name} wins!`)
+        }
+
+        return;
+    }
+    console.log(gameboard.getBoard());
+    switchPlayerTurn();
+  }
+
+  const switchPlayerTurn = function() {
+    if(currentPlayer == player1) {
+        currentPlayer = player2;
+    } else {
+        currentPlayer = player1;
+    }
+  }
+  return {playRound};
+})();
