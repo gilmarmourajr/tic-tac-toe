@@ -99,13 +99,14 @@ form .btn {
 
     background-color: var(--secondary-background);
     border: 4px solid var(--border-color);
-    width: min(90%, 500px);
-    height: 500px;
+    width: min(90%, 400px);
+    height: 400px;
     padding: 10px;
 
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
+    margin-bottom: 1.5em;
 }
 
 #gameDiv div {

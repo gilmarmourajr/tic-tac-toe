@@ -1,30 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <title>Tic-Tac-Toe</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Tic-Tac-Toe!</h1>
-    <div id="gameDiv">
-    </div>
-
+    <div id="gameDiv"></div>
+    <h2 id="resultText"></h2>
     <dialog>
-        <p>Choose player names!</p>
-        <form action="" method="post">
-            <div class="form-row">
-                <label for="player1">Player 1</label>
-                <input id="player1" name="player1" type="text" placeholder="Luffy" required>
-            </div>
-            <div class="form-row">
-                <label for="player2">Player 2</label>
-                <input id="player2" name="player2" type="text" placeholder="Zoro" required>
-            </div>
-            <button class="btn" id="submitNames" type="submit">Confirm</button>
-        </form>
+      <p>Choose player names!</p>
+      <form action="" method="post">
+        <div class="form-row">
+          <label for="player1">Player 1</label>
+          <input
+            id="player1"
+            name="player1"
+            type="text"
+            placeholder="Luffy"
+            required
+          />
+        </div>
+        <div class="form-row">
+          <label for="player2">Player 2</label>
+          <input
+            id="player2"
+            name="player2"
+            type="text"
+            placeholder="Zoro"
+            required
+          />
+        </div>
+        <button class="btn" id="submitNames" type="submit">Confirm</button>
+      </form>
     </dialog>
     <script src="./script.js"></script>
-</body>
+  </body>
 </html>

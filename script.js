@@ -1,10 +1,6 @@
 const gameboard = (function () {
   const board = [];
-
-  for (let i = 0; i < 3; i++) {
-    board[i] = ["", "", ""];
-  }
-
+  
   const getBoard = () => board;
 
   const mark = function (player, row, column) {
@@ -52,7 +48,7 @@ const gameboard = (function () {
 
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < 3; j++) {
-        if (board[i][j] == undefined) {
+        if (board[i][j] == "") {
           isFull = false;
         }
       }
@@ -61,7 +57,13 @@ const gameboard = (function () {
     return isFull;
   };
 
-  return { getBoard, mark, checkWin };
+  const resetBoard = function() {
+    for (let i = 0; i < 3; i++) {
+      board[i] = ["", "", ""];
+    }
+  }
+
+  return { getBoard, mark, checkWin, resetBoard };
 })();
 
 function createPlayer(name, symbol) {
@@ -71,11 +73,66 @@ function createPlayer(name, symbol) {
 const player1 = createPlayer("Gil", "X");
 const player2 = createPlayer("Julia", "O");
 
+const gameDisplay = (function() {
+    const gameDiv = document.getElementById("gameDiv");
+
+    const addArrayToDisplay = function() {
+        let board = gameboard.getBoard();
+        for(let i = 0; i < 3; i++) {
+            for(let j = 0; j < 3; j++) {
+                let newDiv = document.createElement("div");
+                newDiv.textContent = board[i][j];
+                
+                if(newDiv.textContent == "") {
+                  newDiv.addEventListener("click", markerButton);
+                  newDiv.dataset.row = i;
+                  newDiv.dataset.column = j;
+                }
+
+                gameDiv.appendChild(newDiv);
+            }
+        }
+    }
+
+    const deleteCurrentDisplay = function() {
+        while(gameDiv.firstChild) {
+            gameDiv.removeChild(gameDiv.lastChild);
+        }
+    }
+
+    const addResults = function(result) {
+        document.getElementById("resultText").innerText = result;
+    }
+
+    const markerButton = function(event) {
+        let row = event.target.dataset.row;
+        let column = event.target.dataset.column;
+        game.playRound(row, column);
+    }
+    
+    return {addArrayToDisplay, deleteCurrentDisplay, addResults};
+})();
+
 const game = (function () {
   let currentPlayer = player1;
   let gameFinished = false;
+  let isFirstRound = true;
+
+  const startGame = function() {
+    currentPlayer = player1;
+    gameFinished = false;
+    gameboard.resetBoard();
+    gameDisplay.deleteCurrentDisplay();
+    gameDisplay.addArrayToDisplay();
+    isFirstRound = false;
+    gameDisplay.addResults("");
+  }
 
   const playRound = function(row, column) {
+    if(isFirstRound) {
+
+    }
+
     if(gameFinished) {
         return;
     }
@@ -90,9 +147,9 @@ const game = (function () {
         gameFinished = true;
 
         if(winnerStatus === "tie") {
-            console.log("Game over! Tie.");
+            gameDisplay.addResults("Game over! Tie.");
         } else {
-            console.log(`Game over! ${currentPlayer.name} wins!`)
+            gameDisplay.addResults(`Game over! ${currentPlayer.name} wins!`);
         }
 
         return;
@@ -108,28 +165,5 @@ const game = (function () {
         currentPlayer = player1;
     }
   }
-  return {playRound};
-})();
-
-const gameDisplay = (function() {
-    const gameDiv = document.getElementById("gameDiv");
-
-    const addArrayToDisplay = function() {
-        let board = gameboard.getBoard();
-        for(let i = 0; i < 3; i++) {
-            for(let j = 0; j < 3; j++) {
-                let newDiv = document.createElement("div");
-                newDiv.textContent = board[i][j];
-                gameDiv.appendChild(newDiv);
-            }
-        }
-    }
-
-    const deleteCurrentDisplay = function() {
-        while(gameDiv.firstChild) {
-            gameDiv.removeChild(gameDiv.lastChild);
-        }
-    }
-    
-    return {addArrayToDisplay, deleteCurrentDisplay};
+  return {playRound, startGame};
 })();
