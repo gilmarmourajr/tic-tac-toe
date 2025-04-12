@@ -1,0 +1,134 @@
+:root {
+  --main-background: #240046;
+  --main-text: #ffffff;
+  --secondary-background: #3c096c;
+  --border-color: #7b2cbf;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--main-background);
+  color: var(--main-text);
+}
+
+h1 {
+  text-align: center;
+  padding: 1.5em;
+  font-size: 3em;
+}
+
+dialog {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  height: 50%;
+  min-width: 40%;
+  padding: 30px;
+
+  border: 3px solid var(--border-color);
+  background-color: var(--secondary-background);
+  color: var(--main-text);
+}
+
+dialog[open] {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+dialog p {
+  font-size: 2.8em;
+  margin-bottom: 1.5em;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  font-size: 2em;
+}
+
+.form-row input[type="text"] {
+  width: 450px;
+  height: 50px;
+  font-size: 1em;
+  padding: 0 15px;
+}
+
+.form-row label {
+  width: 180px;
+  margin-top: 7px;
+  padding-right: 20px;
+}
+
+.btn {
+  border: none;
+  font-size: 0.5em;
+  font-weight: 600;
+  transition: 0.1s;
+  cursor: pointer;
+}
+
+.btn:hover {
+  scale: 1.1;
+}
+
+form .btn {
+    margin-top: 40px;
+    font-size: 1.5em;
+    padding: 10px 30px;
+
+    background-color: var(--border-color);
+    color: var(--main-text);
+}
+
+#gameDiv {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    background-color: var(--secondary-background);
+    border: 4px solid var(--border-color);
+    width: 500px;
+    height: 500px;
+    padding: 10px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+#gameDiv div {
+    width: 100%;
+    height: 100%;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 6em;
+    font-weight: 600;
+}
+
+#gameDiv :nth-child(5) {
+    border: 3px solid var(--border-color);
+}
+
+#gameDiv :nth-child(4), #gameDiv :nth-child(6) {
+    border-top: 3px solid var(--border-color);
+    border-bottom: 3px solid var(--border-color);
+} 
+
+#gameDiv :nth-child(2), #gameDiv :nth-child(8) {
+    border-left: 3px solid var(--border-color);
+    border-right: 3px solid var(--border-color);
+}
