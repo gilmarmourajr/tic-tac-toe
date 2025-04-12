@@ -24,6 +24,7 @@ body {
 h1 {
   padding: 1.5em;
   font-size: 3em;
+  text-align: center;
 }
 
 dialog {
@@ -133,4 +134,23 @@ form .btn {
 #gameDiv :nth-child(2), #gameDiv :nth-child(8) {
     border-left: 3px solid var(--border-color);
     border-right: 3px solid var(--border-color);
+}
+
+#result {
+    text-align: center;
+}
+
+#gameBtns {
+    display: flex;
+    gap: 50px;
+}
+
+#gameBtns .btn {
+    margin-bottom: 30px;
+
+    padding: 10px 15px;
+    font-size: 1em;
+
+    background-color: var(--border-color);
+    color: var(--main-text);
 }
