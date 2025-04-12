@@ -82,6 +82,9 @@ const game = (function () {
 
     gameboard.mark(currentPlayer, row, column);
 
+    gameDisplay.deleteCurrentDisplay();
+    gameDisplay.addArrayToDisplay();
+
     let winnerStatus = gameboard.checkWin();
     if(winnerStatus) {
         gameFinished = true;
@@ -94,7 +97,7 @@ const game = (function () {
 
         return;
     }
-    console.log(gameboard.getBoard());
+
     switchPlayerTurn();
   }
 
@@ -106,4 +109,27 @@ const game = (function () {
     }
   }
   return {playRound};
+})();
+
+const gameDisplay = (function() {
+    const gameDiv = document.getElementById("gameDiv");
+
+    const addArrayToDisplay = function() {
+        let board = gameboard.getBoard();
+        for(let i = 0; i < 3; i++) {
+            for(let j = 0; j < 3; j++) {
+                let newDiv = document.createElement("div");
+                newDiv.textContent = board[i][j];
+                gameDiv.appendChild(newDiv);
+            }
+        }
+    }
+
+    const deleteCurrentDisplay = function() {
+        while(gameDiv.firstChild) {
+            gameDiv.removeChild(gameDiv.lastChild);
+        }
+    }
+    
+    return {addArrayToDisplay, deleteCurrentDisplay};
 })();
