@@ -71,8 +71,9 @@ function createPlayer(name, symbol) {
 }
 
 const gameBtns = (function() {
-  newGameBtn = document.getElementById("newGameBtn");
-  resetGameBtn = document.getElementById("resetGameBtn");
+  const btnDiv = document.getElementById("gameBtns");
+  const newGameBtn = document.getElementById("newGameBtn");
+  const resetGameBtn = document.getElementById("resetGameBtn");
 
   const eventListener = function() {
     newGameBtn.addEventListener("click", newGame);
@@ -80,6 +81,7 @@ const gameBtns = (function() {
   }
   
   const newGame = function() {
+    hide();
     gameForm.openDialog();
   }
 
@@ -87,7 +89,15 @@ const gameBtns = (function() {
     game.startGame();
   }
 
-  return { eventListener }
+  const hide = function() {
+    btnDiv.style.visibility = "hidden";
+  }
+
+  const show = function() {
+    btnDiv.style.visibility = "visible"
+  }
+
+  return { eventListener, hide, show }
 })();
 
 const gameForm = (function () {
@@ -111,6 +121,8 @@ const gameForm = (function () {
       const player2 = createPlayer(name2, "O");
 
       game.getNames(player1, player2);
+      gameBtns.eventListener();
+      gameBtns.show();
       form.reset();
       dialog.close();
       game.startGame();
@@ -222,5 +234,5 @@ const game = (function () {
   return { playRound, startGame, getNames };
 })();
 
+gameBtns.hide();
 gameForm.eventListener();
-gameBtns.eventListener();
