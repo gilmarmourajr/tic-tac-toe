@@ -82,6 +82,7 @@ const gameBtns = (function() {
   
   const newGame = function() {
     hide();
+    gameDisplay.addResults("");
     gameForm.openDialog();
   }
 
