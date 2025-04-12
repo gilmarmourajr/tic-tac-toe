@@ -1,5 +1,6 @@
 # Tic-Tac-Toe
 Built as part of The Odin Project's curriculum.
+
 Live server link: https://gilmarmourajr.github.io/tic-tac-toe/
 
 **Description:** Designed and created a web game of Tic Tac Toe. The purpose of the project was to use the Module pattern and the Factory Pattern to build and design objects to incorporate game logic. The Game offers a Player vs Player game mode, where players take turns placing their markers in order to win the game.
